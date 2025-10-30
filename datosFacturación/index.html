@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Datos de Facturación</title>
+    <link rel="icon" href="./insetti.ico" type="image/x-icon">
+    <style>
+        /* --- Reset y base accesible --- */
+        *, *::before, *::after { box-sizing: border-box; }
+        html, body { height: 100%; }
+        body {
+        margin: 0;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+        line-height: 1.5;
+        color: #0f172a; /* slate-900 */
+        background: #f8fafc; /* slate-50 */
+        }
+        img { max-width: 100%; display: block; }
+        label { display: inline-block; font-weight: 600; }
+        input, textarea, button { font: inherit; }
+        :focus-visible { outline: 3px solid #2563eb; outline-offset: 2px; }
+
+        /* --- Layout --- */
+        .wrap { max-width: 720px; margin: 40px auto; padding: 0 16px; }
+
+        .header {
+        display: flex; align-items: center; gap: 16px; margin-bottom: 20px;
+        }
+        .logo-box{
+            width: 250px;           /* o 72/96 según prefieras */
+            height: 100px;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            background: #fff;
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+            margin-right: 8px;     /* separa del título */
+        }
+        .logo-box img{
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .header h1 {
+        margin: 0; font-size: clamp(1.25rem, 1rem + 1vw, 1.75rem);
+        }
+        .sub { color: #475569; margin-top: 4px; }
+
+        .card {
+        background: #ffffff; border-radius: 16px; padding: 24px; margin-top: 16px;
+        box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 8px 24px rgba(15, 23, 42, 0.08);
+        border: 1px solid #e2e8f0; /* slate-200 */
+        }
+
+        fieldset { border: none; padding: 0; margin: 0; }
+        legend { font-size: 1.05rem; font-weight: 700; margin-bottom: 12px; }
+
+        .grid {
+        display: grid; gap: 16px;
+        grid-template-columns: 1fr;
+        }
+        @media (min-width: 640px) {
+        .grid.two { 
+            grid-template-columns: 1fr 1fr;
+            align-items: start; 
+        }
+        }
+
+        .control { display: grid; gap: 6px; align-self: start;}
+        .req::after { content: " *"; color: #dc2626; font-weight: 700; }
+        .hint { color: #64748b; font-size: 0.9rem; }
+
+        input[type="text"], input[type="search"], textarea {
+        min-height: 44px; width: 100%; border: 1px solid #cbd5e1; border-radius: 12px; padding: 12px 14px;
+        background: #f8fafc; transition: border-color .2s, background-color .2s, box-shadow .2s;
+        }
+        input::placeholder, textarea::placeholder { color: #94a3b8; }
+        input:focus, textarea:focus { background: #fff; border-color: #2563eb; box-shadow: 0 0 0 4px rgba(37,99,235,0.12); }
+
+        /* Validación nativa visible */
+        input:required:invalid { border-color: #fca5a5; } /* red-300 */
+
+        .actions { margin-top: 16px; display: flex; gap: 12px; justify-content: center;}
+        .btn {
+        appearance: none; border: none; cursor: pointer; padding: 12px 18px; border-radius: 12px;
+        font-weight: 700; letter-spacing: .2px; background: #2563eb; color: #fff;
+        box-shadow: 0 6px 16px rgba(37,99,235,0.25); transition: transform .05s ease, box-shadow .2s ease, background .2s ease;
+        }
+        .btn:hover { background: #1e40af; box-shadow: 0 10px 24px rgba(30,64,175,0.35); }
+        .btn:active { transform: translateY(1px); }
+
+        .foot-note { color: #475569; font-size: 0.95rem; margin-top: 16px; }
+        .muted { color: #64748b; }
+    </style>
+</head>
+<body>
+    <main class="wrap" role="main">
+        <header class="header" aria-label="Encabezado">
+        <div class="logo-box">
+            <img src="./logo.webp" alt="Insetti"/>
+        </div>
+        <div>
+            <h1>Datos de Facturación</h1>
+            <p class="sub">Ingresa tus datos fiscales para emitir tu CFDI. Verifica que coincidan con tu Constancia de Situación Fiscal.</p>
+        </div>
+        </header>
+
+        <section class="card" aria-labelledby="legend-fiscal">
+        <form id="billing-form" action="#" method="post" novalidate>
+            <fieldset>
+            <legend id="legend-fiscal">Información fiscal</legend>
+
+            <div class="grid two">
+                <div class="control">
+                <label for="nombre" class="req">Nombre(s)</label>
+                <input
+                    id="nombre" name="given-name" type="text" inputmode="text"
+                    placeholder="Ej. María Fernanda" autocomplete="given-name" required />
+                </div>
+
+                <div class="control">
+                <label for="apaterno" class="req">Apellido paterno</label>
+                <input
+                    id="apaterno" name="family-name" type="text" inputmode="text"
+                    placeholder="Ej. García" autocomplete="family-name" required />
+                </div>
+
+                <div class="control">
+                <label for="amaterno">Apellido materno (opcional)</label>
+                <input id="amaterno" name="additional-name" type="text" inputmode="text" placeholder="Ej. López" autocomplete="additional-name" />
+                </div>
+
+                <div class="control">
+                <label for="rfc" class="req">RFC</label>
+                <input
+                    id="rfc" name="rfc" type="text" inputmode="text"
+                    placeholder="Ej. GAGF8001011H0"
+                    autocomplete="off" required
+                    pattern="^([A-ZÑ&]{3,4})\d{6}[A-Z0-9]{3}$"
+                    style="text-transform: uppercase"
+                    aria-describedby="rfc-hint"/>
+                <small id="rfc-hint" class="hint">Formato: 3–4 letras + 6 dígitos de fecha (AAMMDD) + 3 alfanuméricos.</small>
+                </div>
+            </div>
+
+            <div class="grid">
+                <div class="control">
+                <label for="razon">Razón social (opcional)</label>
+                <input id="razon" name="organization" type="text" placeholder="Si aplica para tu facturación" autocomplete="organization" />
+                </div>
+            </div>
+            <br>
+            <div class="grid two">
+                <div class="control">
+                <label for="domicilio" class="req">Domicilio</label>
+                <input id="domicilio" name="address-line1" type="text" inputmode="text" placeholder="Calle, número, colonia, municipio, estado" autocomplete="address-line1" required />
+                </div>
+                <div class="control">
+                <label for="cp" class="req">Código postal</label>
+                <input id="cp" name="postal-code" type="text" inputmode="numeric" placeholder="Ej. 01234" autocomplete="postal-code" required pattern="^\d{5}$" aria-describedby="cp-hint" />
+                <small id="cp-hint" class="hint">5 dígitos (México).</small>
+                </div>
+            </div>
+            <br>
+            <div class="actions">
+                <button class="btn" type="submit" aria-label="Enviar datos de facturación">Enviar datos de facturación</button>
+            </div>
+            </fieldset>
+            <p class="foot-note">
+            <strong>Nota:</strong> Para CFDI 4.0, RFC, nombre completo o razón social y código postal deben coincidir exactamente con tu
+            <span class="muted">Constancia de Situación Fiscal</span> vigente.
+            </p>
+        </form>
+        </section>
+    </main>
+</body>
+<script>
+    (function () {
+        const ENDPOINT = "https://aretha-unstrict-vicky.ngrok-free.dev/api/facturacion"; // <-- AJUSTA la ruta
+        const form = document.getElementById('billing-form');
+        const out  = document.getElementById('json-preview');
+        const btn  = form.querySelector('button[type="submit"]');
+
+        form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+        }
+
+        const payload = {
+            nombre:           document.getElementById('nombre').value.trim(),
+            apellido_paterno: document.getElementById('apaterno').value.trim(),
+            apellido_materno: (document.getElementById('amaterno').value || '').trim() || null,
+            rfc:              document.getElementById('rfc').value.trim().toUpperCase(),
+            razon_social:     (document.getElementById('razon').value || '').trim() || null,
+            domicilio:        document.getElementById('domicilio').value.trim(),
+            codigo_postal:    document.getElementById('cp').value.trim()
+        };
+
+        const body = JSON.stringify(payload, null, 2);
+        if (out) out.textContent = body;
+
+        // UI: deshabilitar botón durante el envío
+        btn.disabled = true; btn.textContent = "Enviando…";
+
+        try {
+            const res = await fetch(ENDPOINT, {
+            method: 'POST',
+            mode: 'cors', // importante para CORS
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+            });
+
+            if (!res.ok) {
+            const text = await res.text();
+            throw new Error(`HTTP ${res.status}: ${text}`);
+            }
+
+            const data = await res.json().catch(() => ({}));
+            console.log('Respuesta servidor:', data);
+            alert('Enviado correctamente.');
+        } catch (err) {
+            console.error(err);
+            alert('Error al enviar: ' + err.message);
+        } finally {
+            btn.disabled = false; btn.textContent = "Enviar datos de facturación";
+        }
+        });
+    })();
+</script>
+
+
+</html>
