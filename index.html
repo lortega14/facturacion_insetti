@@ -19,32 +19,11 @@
             <p class="sub">Ingresa tus datos fiscales para emitir tu CFDI. Verifica que coincidan con tu Constancia de Situación Fiscal.</p>
         </div>
         </header>
-
         <section class="card" aria-labelledby="legend-fiscal">
         <form id="billing-form" action="#" method="post" novalidate>
             <fieldset>
             <legend id="legend-fiscal">Información fiscal</legend>
-
             <div class="grid two">
-                <div class="control">
-                <label for="nombre" class="req">Nombre(s)</label>
-                <input
-                    id="nombre" name="given-name" type="text" inputmode="text"
-                    placeholder="Ej. María Fernanda" autocomplete="given-name" required />
-                </div>
-
-                <div class="control">
-                <label for="apaterno" class="req">Apellido paterno</label>
-                <input
-                    id="apaterno" name="family-name" type="text" inputmode="text"
-                    placeholder="Ej. García" autocomplete="family-name" required />
-                </div>
-
-                <div class="control">
-                <label for="amaterno">Apellido materno (opcional)</label>
-                <input id="amaterno" name="additional-name" type="text" inputmode="text" placeholder="Ej. López" autocomplete="additional-name" />
-                </div>
-
                 <div class="control">
                 <label for="rfc" class="req">RFC</label>
                 <input
@@ -56,26 +35,73 @@
                     aria-describedby="rfc-hint"/>
                 <small id="rfc-hint" class="hint">Formato: 3–4 letras + 6 dígitos de fecha (AAMMDD) + 3 alfanuméricos.</small>
                 </div>
-            </div>
+                
+                
 
-            <div class="grid">
-                <div class="control">
-                <label for="razon">Razón social (opcional)</label>
-                <input id="razon" name="organization" type="text" placeholder="Si aplica para tu facturación" autocomplete="organization" />
-                </div>
-            </div>
-            <br>
-            <div class="grid two">
-                <div class="control">
-                <label for="domicilio" class="req">Domicilio</label>
-                <input id="domicilio" name="address-line1" type="text" inputmode="text" placeholder="Calle, número, colonia, municipio, estado" autocomplete="address-line1" required />
-                </div>
                 <div class="control">
                 <label for="cp" class="req">Código postal</label>
                 <input id="cp" name="postal-code" type="text" inputmode="numeric" placeholder="Ej. 01234" autocomplete="postal-code" required pattern="^\d{5}$" aria-describedby="cp-hint" />
                 <small id="cp-hint" class="hint">5 dígitos (México).</small>
                 </div>
+
+                
             </div>
+            <br>
+            <div class="grid">
+                <div class="control">
+                <label for="rSocial" class="req">Nombre o razón social</label>
+                <input
+                    id="rSocial" name="given-name" type="text" inputmode="text"
+                    placeholder="Ej. Juan Pérez García o Empresa S.A. de C.V" autocomplete="given-name" required />
+                </div>
+                <div class="control">
+                <label for="email" class="req">Correo electrónico</label>
+                <input
+                    id="email" name="family-name" type="text" inputmode="text"
+                    placeholder="Ej. tu_correo@dominio.com" autocomplete="family-name" required />
+                </div>
+                <div class="control">
+                    <label for="CFDIuse" class="req">Uso del CFDI</label>
+                    <select id="CFDIuse" name="CFDIuse" required>
+                        <option value="" disabled selected>Selecciona una opción</option>
+                        <option value="S01">S01 - Sin efectos fiscales</option>
+                        <option value="G01">G01 - Adquisición de mercancías</option>
+                        <option value="G02">G02 - Devoluciones, descuentos o bonificaciones</option>
+                        <option value="G03">G03 - Gastos en general</option>
+                        <option value="I01">I01 - Construcciones</option>
+                        <option value="I02">I02 - Mobiliario y equipo de oficina por inversiones</option>
+                        <option value="I03">I03 - Equipo de transporte</option>
+                        <option value="I04">I04 - Equipo de cómputo y accesorios</option>
+                        <option value="I05">I05 - Dados, troqueles, moldes, matrices y herramental</option>
+                        <option value="I08">I08 - Otra maquinaria y equipo</option>
+                        <option value="D01">D01 - Honorarios médicos, dentales y gastos hospitalarios</option>
+                        <option value="D04">D04 - Donativos</option>
+                        <option value="D05">D05 - Intereses reales efectivamente pagados por créditos hipotecarios</option>
+                        <option value="D07">D07 - Primas por seguros de gastos médicos</option>
+                        <option value="D10">D10 - Pagos por servicios educativos (colegiaturas)</option>
+                    </select>
+                </div>
+            
+                <div class="control">
+                <label for="regime" class="req">Régimen fiscal</label>
+                <select id="regime" name="regime" required>
+                    <option value="" disabled selected>Selecciona una opción</option>
+                    <option value="601">601 - General de Ley Personas Morales</option>
+                    <option value="603">603 - Personas Morales con Fines no Lucrativos</option>
+                    <option value="605">605 - Sueldos y Salarios e Ingresos Asimilados a Salarios</option>
+                    <option value="606">606 - Arrendamiento</option>
+                    <option value="608">608 - Demás ingresos</option>
+                    <option value="612">612 - Personas Físicas con Actividades Empresariales y Profesionales</option>
+                    <option value="614">614 - Ingresos por intereses</option>
+                    <option value="616">616 - Sin obligaciones fiscales</option>
+                    <option value-="621">621 - Incorporación Fiscal</option>
+                    <option value="625">625 - Régimen de las Actividades Empresariales con ingresos a través de Plataformas Tecnológicas</option>
+                    <option value="626">626 - Régimen Simplificado de Confianza</option>
+                </select>
+                </div>
+                
+            </div>
+            <br>
             <br>
             <div class="actions">
                 <button class="btn" type="submit" aria-label="Enviar datos de facturación">Enviar datos de facturación</button>
