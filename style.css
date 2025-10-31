@@ -81,7 +81,7 @@ appearance: none; border: none; cursor: pointer; padding: 12px 18px; border-radi
 font-weight: 700; letter-spacing: .2px; background: #ff8000; color: #fff;
 box-shadow: 0 6px 16px rgb(194, 116, 0); transition: transform .05s ease, box-shadow .2s ease, background .2s ease;
 }
-.btn:hover { background: #e77400; box-shadow: 0 10px 24px rgba(30,64,175,0.35); }
+.btn:hover { background: #e77400; box-shadow: 0 10px 24px rgba(134, 87, 24, 0.35); }
 .btn:active { transform: translateY(1px); }
 
 .foot-note { color: #475569; font-size: 0.95rem; margin-top: 16px; }
@@ -149,4 +149,22 @@ input[readonly] {
     margin-top: 2px; 
     color: #64748b; 
     font-size: 0.9rem; 
+}
+
+select:required:invalid {
+    color: #94a3b8; /* El mismo color que usas para 'input::placeholder' */
+}
+
+/* 2. Asegura que al seleccionar una opción válida, el texto vuelva a ser oscuro */
+select option {
+    color: #0f172a; /* El color de texto normal de tu 'body' */
+}
+
+/* 3. Estilo para un <select> completamente deshabilitado */
+select[disabled] {
+    color: #64748b; /* Un color más apagado (color de "hint") */
+    background: #f1f5f9; /* Mismo fondo que 'input[readonly]' */
+    border-color: #e2e8f0; /* Mismo borde que 'input[readonly]' */
+    background-image: none; /* Oculta la flecha personalizada */
+    cursor: not-allowed;
 }
