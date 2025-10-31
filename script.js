@@ -20,7 +20,7 @@
         usoCFDI: (document.getElementById('CFDIuse').value || '').trim() || null,
         razon_social:           document.getElementById('rSocial').value.trim(),
         regimen_fiscal:        document.getElementById('regime').value.trim(),
-        
+        forma_pago:             document.getElementById('paymentMethod').value.trim(),
     };
 
     const body = JSON.stringify(payload, null, 2);
