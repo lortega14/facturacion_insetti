@@ -14,13 +14,13 @@
     }
 
     const payload = {
-        nombre:           document.getElementById('nombre').value.trim(),
-        apellido_paterno: document.getElementById('apaterno').value.trim(),
-        apellido_materno: (document.getElementById('amaterno').value || '').trim() || null,
         rfc:              document.getElementById('rfc').value.trim().toUpperCase(),
-        razon_social:     (document.getElementById('razon').value || '').trim() || null,
-        domicilio:        document.getElementById('domicilio').value.trim(),
-        codigo_postal:    document.getElementById('cp').value.trim()
+        correo_electronico: document.getElementById('email').value.trim(),
+        codigo_postal:    document.getElementById('cp').value.trim(),
+        usoCFDI: (document.getElementById('CFDIuse').value || '').trim() || null,
+        razon_social:           document.getElementById('rSocial').value.trim(),
+        regimen_fiscal:        document.getElementById('regime').value.trim(),
+        
     };
 
     const body = JSON.stringify(payload, null, 2);
