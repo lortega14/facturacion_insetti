@@ -12,7 +12,9 @@
     <main class="wrap" role="main">
         <header class="header" aria-label="Encabezado">
         <div class="logo-box">
-            <img src="./images/logo.webp" alt="Insetti"/>
+            <a href="https://www.insetti.com.mx/" target="_blank" rel="noopener noreferrer" aria-label="Abrir insetti.com.mx en nueva pestaña">
+                <img src="./images/logo.webp" alt="Insetti" style="width:180px;height:auto" />
+            </a>
         </div>
         <div>
             <h1>Datos de Facturación</h1>
@@ -142,5 +144,26 @@
         </form>
         </section>
     </main>
+    <div id="confirm-overlay" class="overlay hidden" aria-hidden="true"></div>
+    <div
+        id="confirm-dialog"
+        class="modal hidden"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="confirm-title"
+        >
+        <div class="modal-card">
+            <h2 id="confirm-title">¿Confirmar envío?</h2>
+            <p>¿Estás seguro de que tus datos son correctos?</p>
+            <div class="actions">
+            <button type="button" id="btn-review" class="btn btn-secondary">
+                Quiero revisarlos nuevamente
+            </button>
+            <button type="button" id="btn-confirm" class="btn">
+                Sí, estoy seguro
+            </button>
+        </div>
+        </div>
+    </div>
 </body>
 </html>
