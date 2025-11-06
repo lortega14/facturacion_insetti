@@ -168,3 +168,39 @@ select[disabled] {
     background-image: none; /* Oculta la flecha personalizada */
     cursor: not-allowed;
 }
+
+.hidden { display: none !important; }
+
+.overlay {
+    position: fixed; inset: 0;
+    background: rgba(15,23,42,0.45);
+    z-index: 999;
+}
+
+.modal {
+    position: fixed; inset: 0;
+    display: grid; place-items: center;
+    z-index: 1000;
+}
+
+.modal .modal-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(15,23,42,0.18);
+    width: min(520px, 92vw);
+    padding: 20px;
+}
+
+.modal .modal-card h2 { margin: 0 0 8px; font-size: 1.1rem; }
+.modal .modal-card p  { margin: 0 0 14px; color: #475569; }
+
+.modal .actions {
+    display: flex; gap: 12px; justify-content: flex-end; flex-wrap: wrap;
+}
+
+.btn.btn-secondary {
+    background: #fff; color: #0f172a; border: 1px solid #cbd5e1; box-shadow: none;
+}
+.btn.btn-secondary:hover { background: #f8fafc; }
+
