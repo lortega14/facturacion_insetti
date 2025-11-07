@@ -23,6 +23,22 @@
         openDialog();
     });
 
+    const rfcInput = document.getElementById('rfc');
+    if(rfcInput){
+        const toUpperLive = (e) => {
+            const el = e.target;
+            const { selectionStart, selectionEnd, value } = el;
+            const upper = value.toUpperCase();
+            if (value !== upper) {
+                el.value = upper;
+                if(selectionStart !== null && selectionEnd !== null) {
+                    el.setSelectionRange(selectionStart, selectionEnd);
+                }
+            }
+        };
+        rfcInput.addEventListener('input', toUpperLive);
+    }
+
     // Botón "Quiero revisarlos nuevamente"
     if (btnReview) btnReview.addEventListener('click', closeDialog);
 
@@ -48,7 +64,7 @@
         if (out) out.textContent = body;
 
         // UI: deshabilitar botón durante el envío
-        btn.disabled = true; btn.textContent = "Enviando…";
+        btn.disabled = true;
 
         try {
         const res = await fetch(ENDPOINT, {
@@ -80,7 +96,7 @@
         } finally {
         // Si hubo éxito, el botón ya no existe; si falló, reactivar
         if (document.body.contains(btn)) {
-            btn.disabled = false; btn.textContent = "Enviar datos de facturación";
+            btn.disabled = false;
         }
         }
     }
