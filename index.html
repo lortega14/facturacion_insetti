@@ -27,9 +27,12 @@
             <legend id="legend-fiscal">Información fiscal</legend>
             <div class="grid two">
                 <div class="control">
-                <label for="rfc" class="req">RFC</label>
+                <label for="rfc" class="req">
+                    RFC <span class="visually-hidden">(Obligatorio)</span>
+                </label>
                 <input
                     id="rfc" name="rfc" type="text" inputmode="text"
+                    maxlength="13"
                     placeholder="Ej. GAGF8001011H0"
                     autocomplete="off" required
                     pattern="^([A-ZÑ&]{3,4})\d{6}[A-Z0-9]{3}$"
@@ -37,20 +40,19 @@
                     aria-describedby="rfc-hint"/>
                 <small id="rfc-hint" class="hint">Formato: 3–4 letras + 6 dígitos de fecha (AAMMDD) + 3 alfanuméricos.</small>
                 </div>
-                
-                
 
                 <div class="control">
                 <label for="cp" class="req">Código postal</label>
-                <input id="cp" name="postal-code" type="text" inputmode="numeric" placeholder="Ej. 01234" autocomplete="postal-code" required pattern="^\d{5}$" aria-describedby="cp-hint" />
+                <input id="cp" name="postal-code" maxlength="5" type="text" inputmode="numeric" placeholder="Ej. 01234" autocomplete="postal-code" required pattern="^\d{5}$" aria-describedby="cp-hint" />
                 <small id="cp-hint" class="hint">5 dígitos (México).</small>
                 </div>
 
                 <div class="control">
                 <label for="email" class="req">Correo electrónico</label>
                 <input
-                    id="email" name="family-name" type="text" inputmode="text"
-                    placeholder="Ej. tu_correo@dominio.com" autocomplete="family-name" required />
+                    id="email" 
+                    name="email" type="email" inputmode="email"
+                    placeholder="Ej. tu_correo@dominio.com" autocomplete="email" required />
                 </div>
 
                 <div class="control">
@@ -134,7 +136,9 @@
             <br>
             <br>
             <div class="actions">
-                <button class="btn" type="submit" aria-label="Enviar datos de facturación">Enviar datos de facturación</button>
+                <button class="btn" type="submit" aria-label="Enviar datos de facturación">
+                    <span class="btn-text">Enviar datos de facturación</span> <svg class="spinner" viewBox="0 0 50 50"><circle cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle></svg>
+                </button>
             </div>
             </fieldset>
             <p class="foot-note">
