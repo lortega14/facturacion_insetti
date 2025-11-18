@@ -131,7 +131,8 @@
             </a>
             <section class="card" aria-live="polite" style="width:min(760px,92vw);">
                 <h1>Envío realizado con éxito</h1>
-                <p>Tu información se envió correctamente, muchas gracias por tu compra</p>
+                <p>Tu información se envió correctamente, muchas gracias por tu compra.</p>
+                <p>¡Enviaremos tu factura a tu correo electrónico!</p>
             </section>
             `;
         }
