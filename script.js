@@ -12,10 +12,8 @@
     const urlParams = new URLSearchParams(window.location.search);
     const orderIdFromUrl = urlParams.get('order_id');
 
-    // Si no hay order_id, quizás quieras bloquear el formulario o mostrar error
     if (!orderIdFromUrl) {
         console.warn("No se detectó order_id en la URL");
-        // Opcional: redirigir a página de error o deshabilitar botón
     }
     
     if (sessionStorage.getItem('billingSubmitted') === '1') {
