@@ -9,6 +9,15 @@
     const btnReview  = document.getElementById('btn-review');
     const btnConfirm = document.getElementById('btn-confirm');
 
+    const urlParams = new URLSearchParams(window.location.search);
+    const orderIdFromUrl = urlParams.get('order_id');
+
+    // Si no hay order_id, quizás quieras bloquear el formulario o mostrar error
+    if (!orderIdFromUrl) {
+        console.warn("No se detectó order_id en la URL");
+        // Opcional: redirigir a página de error o deshabilitar botón
+    }
+    
     if (sessionStorage.getItem('billingSubmitted') === '1') {
         renderSuccessAndLock();
     }
@@ -44,6 +53,7 @@
 
     async function performSubmitJSON() {
         const payload = {
+        order_id:           orderIdFromUrl,
         rfc:                 document.getElementById('rfc').value.trim().toUpperCase(),
         correo_electronico:  document.getElementById('email').value.trim(),
         codigo_postal:       document.getElementById('cp').value.trim(),
