@@ -12,8 +12,21 @@
     const urlParams = new URLSearchParams(window.location.search);
     const orderIdFromUrl = urlParams.get('order_id');
 
-    if (!orderIdFromUrl) {
-        console.warn("No se detectó order_id en la URL");
+    const esIdValido = orderIdFromUrl && /^\d{15,}$/.test(orderIdFromUrl);
+
+    if (!esIdValido) {
+        const main = document.querySelector('main') || document.body;
+        main.innerHTML = `
+            <a href="https://www.insetti.com.mx/" aria-label="Ir a insetti.com.mx">
+                <img src="./images/logo.webp" alt="Insetti" style="width:180px;height:auto" />
+            </a>
+            <section class="card" style="text-align: center; padding: 40px;">
+                <h1 style="color: #dc2626; margin-bottom: 1rem;">Acceso no válido 🚫</h1>
+                <p>No se ha detectado una orden para facturar.</p>
+                <p style="color: #64748b;">Por favor utiliza el enlace temporal enviado a tu mensajería de Mercado Libre.</p>
+            </section>
+        `;
+        return;
     }
     
     if (sessionStorage.getItem('billingSubmitted') === '1') {
