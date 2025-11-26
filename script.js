@@ -12,7 +12,7 @@
     const urlParams = new URLSearchParams(window.location.search);
     const orderIdFromUrl = urlParams.get('order_id');
 
-    const esIdValido = orderIdFromUrl && /^\d{15,}$/.test(orderIdFromUrl);
+    const esIdValido = orderIdFromUrl && /^\d{16,}$/.test(orderIdFromUrl);
 
     if (!esIdValido) {
         const main = document.querySelector('main') || document.body;
