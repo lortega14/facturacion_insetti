@@ -12,6 +12,11 @@
     const urlParams = new URLSearchParams(window.location.search);
     const orderIdFromUrl = urlParams.get('order_id');
 
+    const buyerIdFromUrl = urlParams.get('buyer_id') || null;
+    const itemTitle      = urlParams.get('item');
+    const itemQty        = urlParams.get('qty');
+    const itemPrice      = urlParams.get('price');
+
     const esIdValido = orderIdFromUrl && /^\d{16,}$/.test(orderIdFromUrl);
 
     if (!esIdValido) {
@@ -27,6 +32,28 @@
             </section>
         `;
         return;
+    }
+
+    if (itemTitle) {
+        const summaryCard = document.getElementById('order-summary');
+        const lblItem     = document.getElementById('lbl-item');
+        const lblQty      = document.getElementById('lbl-qty');
+        const lblTotal    = document.getElementById('lbl-total');
+
+        if (summaryCard) {
+            summaryCard.classList.remove('hidden'); // Mostrar la tarjeta
+            
+            lblItem.textContent = itemTitle;
+            lblQty.textContent  = itemQty;
+            
+            // Formatear precio a moneda
+            const total = parseFloat(itemPrice) * parseFloat(itemQty);
+            const formatter = new Intl.NumberFormat('es-MX', {
+                style: 'currency',
+                currency: 'MXN'
+            });
+            lblTotal.textContent = !isNaN(total) ? formatter.format(total) : `$${itemPrice}`;
+        }
     }
     
     if (sessionStorage.getItem('billingSubmitted') === '1') {
@@ -64,14 +91,15 @@
 
     async function performSubmitJSON() {
         const payload = {
-        order_id:           orderIdFromUrl,
-        rfc:                 document.getElementById('rfc').value.trim().toUpperCase(),
-        correo_electronico:  document.getElementById('email').value.trim(),
-        codigo_postal:       document.getElementById('cp').value.trim(),
-        usoCFDI:            (document.getElementById('CFDIuse').value || '').trim() || null,
-        razon_social:        document.getElementById('rSocial').value.trim(),
-        regimen_fiscal:     (document.getElementById('regime').value || '').trim() || null,
-        forma_pago:         (document.getElementById('paymentMethod').value || '').trim() || null,
+            order_id:           orderIdFromUrl,
+            buyer_id:          buyerIdFromUrl,
+            rfc:                 document.getElementById('rfc').value.trim().toUpperCase(),
+            correo_electronico:  document.getElementById('email').value.trim(),
+            codigo_postal:       document.getElementById('cp').value.trim(),
+            usoCFDI:            (document.getElementById('CFDIuse').value || '').trim() || null,
+            razon_social:        document.getElementById('rSocial').value.trim(),
+            regimen_fiscal:     (document.getElementById('regime').value || '').trim() || null,
+            forma_pago:         (document.getElementById('paymentMethod').value || '').trim() || null,
         };
 
         const body = JSON.stringify(payload, null, 2);
