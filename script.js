@@ -12,10 +12,6 @@
     const urlParams = new URLSearchParams(window.location.search);
     const orderIdFromUrl = urlParams.get('order_id');
 
-    const itemTitle = urlParams.get('item');
-    const itemQty   = urlParams.get('qty');
-    const itemPrice = urlParams.get('price');
-
     const esIdValido = orderIdFromUrl && /^\d{16,}$/.test(orderIdFromUrl);
 
     if (!esIdValido) {
@@ -31,31 +27,6 @@
             </section>
         `;
         return;
-    }
-
-    if (itemTitle) {
-        const summaryCard = document.getElementById('order-summary');
-        const lblItem     = document.getElementById('lbl-item');
-        const lblQty      = document.getElementById('lbl-qty');
-        const lblTotal    = document.getElementById('lbl-total');
-
-        if (summaryCard) {
-            // Cálculos básicos
-            const qty = parseInt(itemQty) || 1;
-            const price = parseFloat(itemPrice) || 0;
-            const total = qty * price;
-
-            // Formato moneda
-            const fmt = new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' });
-
-            // Asignar textos (decodeURIComponent recupera espacios y tildes si se codificaron)
-            lblItem.textContent  = decodeURIComponent(itemTitle);
-            lblQty.textContent   = qty;
-            lblTotal.textContent = fmt.format(total);
-
-            // Mostrar la tarjeta
-            summaryCard.classList.remove('hidden');
-        }
     }
     
     if (sessionStorage.getItem('billingSubmitted') === '1') {
